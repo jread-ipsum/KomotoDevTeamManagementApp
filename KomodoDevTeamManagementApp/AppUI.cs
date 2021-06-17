@@ -24,15 +24,16 @@ namespace KomodoDevTeamManagementApp
             bool keepRunning = true;
             while (keepRunning)
             {
+                Console.WriteLine("------Welcome to Komodo Developer Team Management App-------\n");
+
                 Console.WriteLine("Select a menu option:\n" +
                     "1. Add New Developer\n" +
                     "2. View Developer Directory\n" +
-                    "3. Update Existing Developers\n" +
-                    "4. Delete Existing Developers\n" +
-                    "5. Add New Developer Team\n" +
-                    "6. View Developer Teams Directory\n" +
-                    "7. Update Existing Developer Teams\n" +
-                    "8. Exit\n");
+                    "3. Update or Delete Existing Developers\n" +
+                    "4. Add New Developer Team\n" +
+                    "5. View Developer Teams Directory\n" +
+                    "6. Update Existing Developer Teams\n" +
+                    "7. Exit\n");
 
                 string input = Console.ReadLine();
 
@@ -48,18 +49,15 @@ namespace KomodoDevTeamManagementApp
                         UpdateExistingDeveloper();
                         break;
                     case "4":
-                        DeleteExistingDeveloper();
-                        break;
-                    case "5":
                         CreateNewTeam();
                         break;
-                    case "6":
+                    case "5":
                         DisplayTeamDirectory();
                         break;
-                    case "7":
+                    case "6":
                         UpdateExistingTeam();
                         break;
-                    case "8":
+                    case "7":
                         Console.WriteLine("Goodbye");
                         keepRunning = false;
                         break;
@@ -85,13 +83,13 @@ namespace KomodoDevTeamManagementApp
             int idAsInt = int.Parse(idAsString);
             newDeveloper.IdNumber = idAsInt;                                                        //try having user assign id number then have a check to see if id number already exists if exists enter new number.
 
-            Console.WriteLine("Enter the developers first name");
+            Console.WriteLine("\nEnter the developers first name");
             newDeveloper.FirstName = Console.ReadLine();
 
-            Console.WriteLine("Enter the developers last name");
+            Console.WriteLine("\nEnter the developers last name");
             newDeveloper.LastName = Console.ReadLine();
 
-            Console.WriteLine("Does the developer have access to Pluralsight? Enter yes or no");
+            Console.WriteLine("\nDoes the developer have access to Pluralsight? Enter yes or no");
             string pluralsight = Console.ReadLine().ToLower();
 
             if (pluralsight == "yes")
@@ -102,6 +100,7 @@ namespace KomodoDevTeamManagementApp
             {
                 newDeveloper.HasAccessToPluralsight = false;
             }
+
             _developerRepo.AddDevelopersToList(newDeveloper);
         }
 
@@ -111,7 +110,7 @@ namespace KomodoDevTeamManagementApp
             List<Developer> listOfDevelopers = _developerRepo.GetDevelopersList();
             foreach(Developer developer in listOfDevelopers)
             {
-                Console.WriteLine($"Id Number: {developer.IdNumber}\n" +
+                Console.WriteLine($"Id: {developer.IdNumber}\n" +
                     $" Name: {developer.FirstName} {developer.LastName}\n" +
                     $" Access to Pluralsight: {developer.HasAccessToPluralsight}\n" +
                     $"--------------------------");
@@ -123,8 +122,9 @@ namespace KomodoDevTeamManagementApp
             DisplayAllDevelopers();
 
             Console.WriteLine("\nEnter the Id number of the developer you would like to update:\n");
-            string oldIdAsString = Console.ReadLine();
-            int oldIdAsInt = int.Parse(oldIdAsString);                                                  //should I create a catch if the developer I want to update does not already exist, or is it fine to just create a new developer from this method
+            string oldIdAsString = Console.ReadLine();                                                      //extra steps in the parse process
+            int oldIdAsInt = int.Parse(oldIdAsString);   
+
             Developer developer = _developerRepo.GetDeveloperById(oldIdAsInt);
 
             if (developer == null)
@@ -138,8 +138,8 @@ namespace KomodoDevTeamManagementApp
                 {
                     Console.Clear();
 
-                    Console.WriteLine($"{developer.IdNumber}\n" +
-                        $" {developer.FirstName} {developer.LastName}\n" +
+                    Console.WriteLine($"Id: {developer.IdNumber}\n" +
+                        $"{developer.FirstName} {developer.LastName}\n" +
                         $"Access to Pluralsight: {developer.HasAccessToPluralsight}\n" +
                         $"-------------------------------------");
 
@@ -166,10 +166,12 @@ namespace KomodoDevTeamManagementApp
                             if (nameUpdated)
                             {
                                 Console.WriteLine("\nDeveloper was successfully updated!");
+                                Console.ReadKey();
                             }
                             else
                             {
                                 Console.WriteLine("\nCould not update developer.");
+                                Console.ReadKey();
                             }
                             break;
 
@@ -192,10 +194,12 @@ namespace KomodoDevTeamManagementApp
                             if (pluralsightUpdated)
                             {
                                 Console.WriteLine("\nDeveloper was successfully updated!");
+                                Console.ReadKey();
                             }
                             else
                             {
                                 Console.WriteLine("\nCould not update developer.");
+                                Console.ReadKey();
                             }
                             break;
 
@@ -206,14 +210,18 @@ namespace KomodoDevTeamManagementApp
                             if (wasDeleted)
                             {
                                 Console.WriteLine("\nThe developer was successfully deleted.");
+                                Console.ReadKey();
                             }
                             else
                             {
                                 Console.WriteLine("\nThe developer could not be deleted or does not exist");
+                                Console.ReadKey();
                             }
+                            keepRunning = false;
                             break;
 
                         case "4":
+                            Console.WriteLine("Update Complete");
                             keepRunning = false;
                             break;
 
@@ -222,26 +230,6 @@ namespace KomodoDevTeamManagementApp
                             break;
                     }
                 }
-            }
-        }
-
-        private void DeleteExistingDeveloper()
-        {
-            DisplayAllDevelopers();
-
-            Console.WriteLine("\nEnter the Id number of the developer you would like to delete:");
-            string idAsString = Console.ReadLine();
-            int idAsInt = int.Parse(idAsString);
-
-            bool wasDeleted = _developerRepo.RemoveDeveloperFromList(idAsInt);
-
-            if (wasDeleted)
-            {
-                Console.WriteLine("\nThe developer was successfully deleted.");
-            }
-            else
-            {
-                Console.WriteLine("\nThe developer could not be deleted or does not exist");
             }
         }
 
@@ -345,7 +333,19 @@ namespace KomodoDevTeamManagementApp
                 bool keepRunning = true;
                 while (keepRunning)
                 {
-                    Console.WriteLine("\nSelect an option:\n" +
+                    Console.Clear();
+
+                    Console.WriteLine($"{devTeam.TeamId} {devTeam.TeamName}");
+
+                    if (devTeam.Developers != null)
+                    {
+                        foreach (Developer developer in devTeam.Developers)
+                        {
+                            Console.WriteLine($" Developer:   {developer.IdNumber} {developer.FirstName} {developer.LastName}");
+                        }
+                    }
+
+                        Console.WriteLine("\nSelect an option:\n" +
                         "1. Change team name\n" +
                         "2. Add developers to team.\n" +
                         "3. Remove developers from team.\n" +
@@ -434,7 +434,7 @@ namespace KomodoDevTeamManagementApp
         }
 
 
-        //Seed method
+        //Seed
         private void SeedDeveloperList()
         {
             Developer developer1 = new Developer(33, "Jordan", "Read", true);
