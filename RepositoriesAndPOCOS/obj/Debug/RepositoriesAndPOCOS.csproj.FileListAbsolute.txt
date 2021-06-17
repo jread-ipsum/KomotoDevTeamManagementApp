@@ -1,0 +1,6 @@
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\obj\Debug\RepositoriesAndPOCOS.csprojAssemblyReference.cache
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\obj\Debug\RepositoriesAndPOCOS.csproj.CoreCompileInputs.cache
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\bin\Debug\RepositoriesAndPOCOS.dll
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\bin\Debug\RepositoriesAndPOCOS.pdb
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\obj\Debug\RepositoriesAndPOCOS.dll
+C:\Users\Jordan&Nidya\Desktop\ElevenFiftyProjects\DotNetProjects\KomodoDevTeamManagementApp\RepositoriesAndPOCOS\obj\Debug\RepositoriesAndPOCOS.pdb
