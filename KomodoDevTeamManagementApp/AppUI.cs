@@ -18,7 +18,6 @@ namespace KomodoDevTeamManagementApp
             Menu();
         }
 
-        //Menu
         private void Menu()
         {
             bool keepRunning = true;
@@ -81,7 +80,7 @@ namespace KomodoDevTeamManagementApp
             Console.WriteLine("Enter an Id number");
             string idAsString = Console.ReadLine();
             int idAsInt = int.Parse(idAsString);
-            newDeveloper.IdNumber = idAsInt;                                                        //try having user assign id number then have a check to see if id number already exists if exists enter new number.
+            newDeveloper.IdNumber = idAsInt;                                                        
 
             Console.WriteLine("\nEnter the developers first name");
             newDeveloper.FirstName = Console.ReadLine();
@@ -122,7 +121,7 @@ namespace KomodoDevTeamManagementApp
             DisplayAllDevelopers();
 
             Console.WriteLine("\nEnter the Id number of the developer you would like to update:\n");
-            string oldIdAsString = Console.ReadLine();                                                      //extra steps in the parse process
+            string oldIdAsString = Console.ReadLine();            
             int oldIdAsInt = int.Parse(oldIdAsString);   
 
             Developer developer = _developerRepo.GetDeveloperById(oldIdAsInt);
@@ -389,7 +388,7 @@ namespace KomodoDevTeamManagementApp
 
                         case "3":
 
-                            DisplayAllDevelopers();                                                             //how do I display just developers in called team?
+                            DisplayAllDevelopers();                    
 
                             Console.WriteLine("Enter developer Id number");
                             string deleteDeveloperIdAsString = Console.ReadLine();
@@ -446,9 +445,5 @@ namespace KomodoDevTeamManagementApp
             _developerRepo.AddDevelopersToList(developer3);
         }
 
-        /*private void SeedDevTeamList()
-        {
-            DevTeam devTeam1 = new DevTeam(11, "DreamTeam",)       //?? how do I seed the 'List<Developer> parameter?
-        }*/
     }
 }
